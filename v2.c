@@ -1,11 +1,11 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<time.h>//srand
-#include<locale.h>//setlocale komutu için
-#include<windows.h>//sleep komutu için
-#include<conio.h>
-#include<string.h>//remove,rename
-#include<sys/time.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>//srand
+#include <locale.h>//setlocale komutu için
+#include <windows.h>//sleep komutu için
+#include <conio.h>
+#include <string.h>//remove,rename
+#include <sys/time.h>
 
 struct veri{	//Ýstenen veri tip ve bilgileri
 char *ad;
@@ -14,11 +14,11 @@ char *hesapno;
 int bakiye;
 };
 void yenile();
-double altihane();
+int altihane();
 int para_islem(int);
 void para_transfer();
-int alici(int);
-int tarih(int);
+int alici();
+int tarih();
 void ekle();
 void ara();
 void sil();
@@ -50,7 +50,7 @@ void menu()
 	scanf("%d",&secim);
 //	yenile();
 	system("CLS");//Ekraný temizler
-	sleep(1);//Bekletip açarak yükleniyor efekti verir
+	//Bekletip açarak yükleniyor efekti verir
 	switch(secim)
 	{	
 	case 1:
@@ -346,7 +346,7 @@ void para_transfer()
 	if((tut_bakiye=para_islem(sorgu))==(0))
 		{
 			printf("\nBu hesap numarasý yanlýþ.Lütfen tekrar giriniz.\n");
-			sleep(3);
+			
 			goto hesapnogir;
 		}
 	else
@@ -397,7 +397,7 @@ void para_transfer()
 		}
 	}
 }
-int alici(miktar)
+int alici(int miktar)
 {
 	yenile();
 	int sorgu;
@@ -454,7 +454,6 @@ int alici(miktar)
 	else if(secim_onay=='H'||secim_onay=='h')
 	{
 		printf("\nÝþlemden vazgeçildi.Ana menüye dönülüyor.<<<<\n");
-		sleep(1);
 		system("CLS");
 		son_bakiye=-1;
 		return son_bakiye;
@@ -498,7 +497,7 @@ void ekle()
 	printf("\n------------\nKayýt Baþarýlý!Ana menüye dönülüyor.<<<<");
 	time (&bit);
 	printf ("\nÝþleminiz %.2lf saniye sürdü.\n", difftime (bit,basla));
-	sleep(2);
+	
 	system("CLS");
 }
 void ara()
@@ -536,7 +535,7 @@ void ara()
 		printf("\nAradýðýnýz kelime ile eþleþen hesap bulunamadý.Ana menüye dönülüyor.<<<<");
 		time (&bit);
 		printf ("\nÝþleminiz %.2lf saniye sürdü.\n", difftime (bit,basla));
-		sleep(1);
+		
 		system("CLS");
 	}
 	else
@@ -578,7 +577,7 @@ void sil()
 		{
 			printf("Hesap bulunamadý.Ana menüye dönülüyor.<<<<");
 			fclose(rfp);
-			sleep(2);
+			
 			goto sona;
 		}
 	fclose(rfp);
@@ -627,47 +626,11 @@ void sil()
 		sona://goto deðiþkeni
 		system("CLS");
 }
-double altihane()
+int altihane()
 {
-	double alti_h;
+	int alti_h;
 	srand(time(NULL));
-	alti_h=1+rand()%9;
-	if(alti_h<2)
-	{
-		alti_h+=100000+rand()%32767+rand()%32767+rand()%32767;
-	}
-	else if(alti_h<3)
-	{
-		alti_h+=200000+rand()%32767+rand()%32767+rand()%32767;
-	}
-	else if(alti_h<4)
-	{
-		alti_h+=300000+rand()%32767+rand()%32767+rand()%32767;
-	}
-	else if(alti_h<5)
-	{
-		alti_h+=400000+rand()%32767+rand()%32767+rand()%32767;
-	}
-	else if(alti_h<6)
-	{
-		alti_h+=500000+rand()%32767+rand()%32767+rand()%32767;
-	}
-	else if(alti_h<7)
-	{
-		alti_h+=600000+rand()%32767+rand()%32767+rand()%32767;
-	}
-	else if(alti_h<8)
-	{
-		alti_h+=700000+rand()%32767+rand()%32767+rand()%32767;
-	}
-	else if(alti_h<9)
-	{
-		alti_h+=800000+rand()%32767+rand()%32767+rand()%32767;
-	}
-	else
-	{
-		alti_h+=900000+rand()%32767+rand()%32767+rand()%32767;
-	}
+	alti_h=rand()%300000+10000;
 	return alti_h;
 }
 
