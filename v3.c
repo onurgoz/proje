@@ -3,7 +3,6 @@
 #include<time.h>//srand
 #include<locale.h>//setlocale komutu için
 #include<windows.h>//sleep komutu için
-#include<conio.h>
 #include<string.h>//remove,rename
 
 typedef struct{
@@ -13,7 +12,7 @@ typedef struct{
 	int bakiye;
 }kullanici;
 int secim,secim1;
-int rastgelesayi;
+int rastgelesayi;+
 void menu();
 void YeniMusteriEkleme(int secim);
 void HesapAcma(int secim);
@@ -28,10 +27,11 @@ int HesapNo();
 int main()
 {
 	menu();
-	return 0;
+	exit(1);
 }
 void menu()
-{
+{	
+
 		
 	printf("   Banka otomasyonuna hosgeldiniz.   \n");
 	printf("*************************************\n");
