@@ -7,11 +7,17 @@
 #include<string.h>//remove,rename
 
 typedef struct{
-	char *KullaniciAdi;
-	char *SoyAdi;
-	char *HesapNo;
+	char *KullaniciAdi[100];
+	char *SoyAdi[100];
+	char *HesapNo[100];
 	int bakiye;
-}kullanici;
+}BKullanici;
+typedef struct{
+	char *KullaniciAdi[100];
+	char *SoyAdi[100];
+	char *HesapNo[100];
+	int bakiye;
+}TKullanici;
 int secim,secim1;
 int rastgelesayi;
 void menu();
@@ -24,11 +30,37 @@ void BankaGelirGiderRaporu();
 void HesapOzeti();
 void HesapKapatma();
 int HesapNo();
-
+void oku();
 int main()
 {
+	oku();
 	menu();
+
 	return 0;
+}
+void oku()
+{	
+	TKullanici TicariK[100];
+	BKullanici BireyselK[100];
+	int i=0;
+	FILE *fp,*fp1;
+	printf("test");
+	fp=fopen("Bireysel.txt","r");
+	do
+	{
+		fscanf(fp,"%s %s %s %d\n",BireyselK[i].HesapNo,BireyselK[i].KullaniciAdi,BireyselK[i].SoyAdi,BireyselK[i].bakiye);
+		printf("%s %s %s %d\n",BireyselK[i].HesapNo,BireyselK[i].KullaniciAdi,BireyselK[i].SoyAdi,BireyselK[i].bakiye);
+		i++;
+	}While(!feof(fp));
+	fclose(fp);
+	fp1=fopen("Ticari.txt","r");
+	do
+	{
+		fscanf(fp,"%s %s %s %d\n",TicariK[i].HesapNo,TicariK[i].KullaniciAdi,TicariK[i].SoyAdi,TicariK[i].bakiye);
+		printf("%s %s %s %d\n",TicariK[i].HesapNo,TicariK[i].KullaniciAdi,TicariK[i].SoyAdi,TicariK[i].bakiye);
+		i++;
+	}While(!feof(fp));
+	fclose(fp1);
 }
 void menu()
 {
