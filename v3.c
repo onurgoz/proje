@@ -5,12 +5,17 @@
 #include<windows.h>//sleep komutu için
 #include<conio.h>
 #include<string.h>//remove,rename
+typedef struct
+{
+	int HesapNo;
+	int bakiye;
+}hesap;
 
 typedef struct{
 	char KullaniciAdi[100];
 	char SoyAdi[100];
-	int HesapNo[100];
-	int bakiye;
+	hesap HesapNo[100];
+	
 }Kullanici;
 
 
@@ -18,7 +23,7 @@ int secim,secim1,n;
 int rastgelesayi;
 int OkuBireysel();
 int OkuTicari();
-void menu(int i,int n);
+void menu();
 void YeniMusteriEkleme(int secim,int i,int n);
 void HesapAcma(int secim,int i,int n);
 void ParaCekme(int i,int n);
@@ -31,10 +36,8 @@ int HesapNo();
 Kullanici TicariK[100];
 Kullanici BireyselK[100];
 int main()
-{	int i,n;
-	i=OkuBireysel();
-	n=OkuTicari();
-	menu(i,n);
+{	
+	menu();
 	system("pause");
 }
 int OkuBireysel()
@@ -44,8 +47,9 @@ int OkuBireysel()
 	fp=fopen("Bireysel.txt","r");
 	while(!feof(fp))
 	{
-		fscanf(fp,"%d %s %s %d\n",&BireyselK[i].HesapNo,BireyselK[i].KullaniciAdi,BireyselK[i].SoyAdi,&BireyselK[i].bakiye);
+		fscanf(fp,"%s %s\n%d %d\n",BireyselK[i].KullaniciAdi,BireyselK[i].SoyAdi,&BireyselK[i].HesapNo[i].HesapNo,&BireyselK[i].HesapNo[i].bakiye);
 		i++;
+		
 	}
 	fclose(fp);
 	return i;
@@ -56,14 +60,18 @@ int OkuTicari(){
 	fp1=fopen("Ticari.txt","r");
 	while(!feof(fp1))
 	{
-		fscanf(fp1,"%d %s %s %d\n",&TicariK[n].HesapNo,TicariK[n].KullaniciAdi,TicariK[n].SoyAdi,&TicariK[n].bakiye);
+		fscanf(fp1,"%s %s %d %d",TicariK[n].KullaniciAdi,TicariK[n].SoyAdi,&TicariK[n].HesapNo[n].HesapNo,&TicariK[n].HesapNo[n].bakiye);
+
 		n++;
 	}
 	fclose(fp1);
 	return n;
 }
-void menu(int i,int n)
+void menu()
 {
+	int i,n;
+	i=OkuBireysel();
+	n=OkuTicari();
 	printf("   Banka otomasyonuna hosgeldiniz.   \n");
 	printf("*************************************\n");
 	
@@ -101,16 +109,16 @@ void YeniMusteriEkleme(int secim,int i,int n)
 	printf("\nSoyadi : ");
 	scanf("%s",BireyselK[i].SoyAdi);
 	rastgelesayi=HesapNo();
-	rastgelesayi,BireyselK[i].HesapNo;
-	printf("\nYeni hesap no:%d(Lutfen not ediniz.)\n",BireyselK[i].HesapNo);
+	BireyselK[i].HesapNo[0].HesapNo=rastgelesayi;
+	printf("\nYeni hesap no:%d(Lutfen not ediniz.)\n",BireyselK[i].HesapNo[0].HesapNo);
 	printf("\nLutfen ilk bakiyeyi giriniz : ");
-	scanf("%d",&BireyselK[i].bakiye);
-	fprintf(fp,"%d %s %s %d\n",BireyselK[i].HesapNo,BireyselK[i].KullaniciAdi,BireyselK[i].SoyAdi,BireyselK[i].bakiye);
+	scanf("%d",&BireyselK[i].HesapNo[0].bakiye);
+	fprintf(fp,"%s %s\n%d %d\n",BireyselK[i].KullaniciAdi,BireyselK[i].SoyAdi,BireyselK[i].HesapNo[0].HesapNo,BireyselK[i].HesapNo[0].bakiye);
 	fclose(fp);
 	printf("\n------------\nKayit Basarili!Ana menuye donuluyor.<<<<");
 	
 	
-	system("CLS");
+	/* system("CLS"); */
 
 	}
 	else if(secim==2)
@@ -126,11 +134,11 @@ void YeniMusteriEkleme(int secim,int i,int n)
 	scanf("%s",TicariK[n].SoyAdi);
 	
 	rastgelesayi=HesapNo();
-	rastgelesayi,TicariK[n].HesapNo;
+	TicariK[n].HesapNo[0].HesapNo=rastgelesayi;
 	printf("\nYeni hesap no:%d(Lutfen not ediniz.)\n",TicariK[n].HesapNo);
 	printf("\nLutfen ilk bakiyeyi giriniz : ");
-	scanf("%d",&TicariK[n].bakiye);
-	fprintf(fp1,"%d %s %s %d\n",TicariK[n].HesapNo,TicariK[n].KullaniciAdi,TicariK[n].SoyAdi,TicariK[n].bakiye);
+	scanf("%d",&TicariK[n].HesapNo[0].bakiye);
+	fprintf(fp1,"%s %s\n%d %d\n",TicariK[n].KullaniciAdi,TicariK[n].SoyAdi,TicariK[n].HesapNo[0].HesapNo,TicariK[n].HesapNo[0].bakiye);
 	fclose(fp1);
 	printf("\n------------\nKayit Basarili!Ana menuye donuluyor.<<<<");
 	
@@ -148,28 +156,38 @@ void HesapAcma(int secim,int i,int n)
 		FILE *fp;
 		fp=fopen("Bireysel.txt","r");
 		int say=0,k,HesapEklenecek,sorgu1;
-		printf("Hesap acmak istediginiz kisinin Hesap Numarasini giriniz:\n");
+		printf("Hesap acmak istediginiz kisinin Hesap Numarasini giriniz(!Dikkat ilk acilan hesap numaranizi girmeniz gerekmektedir.):\n");
 		scanf("%d",&sorgu1);
 		printf("\nARAMA SONUCU\n------------");
 		for(k=0;k<i;k++)
 		{
-			if(*BireyselK[k].HesapNo==sorgu1)//string karþýlaþtýrýcý birbirine eþit(0) ise
+			if(BireyselK[k].HesapNo[0].HesapNo==sorgu1)//string karþýlaþtýrýcý birbirine eþit(0) ise
 			{
-				printf("\n<<<<<<<<<<<<\nHesap no : %d\n\nKisinin\n------------\n Adi    : %s\n Soyadi : %s\n Bakiye : %d TL\n------------\n\n\n",*BireyselK[k].HesapNo,BireyselK[k].KullaniciAdi,BireyselK[k].SoyAdi,BireyselK[k].bakiye);
-				++say;//kaç hesap bu kelimeyi içeriyorsa say 
-				HesapEklenecek=k;
-
+				printf("\nAradiginiz kelime ile eslesen hesap bulundu.");
+				printf("\n<<<<<<<<<<<<\nHesap no : %d\n\nKisinin\n------------\n Adi    : %s\n Soyadi : %s\n Bakiye : %d TL\n------------\n\n\n",BireyselK[k].HesapNo[0].HesapNo,BireyselK[k].KullaniciAdi,BireyselK[k].SoyAdi,BireyselK[k].HesapNo[0].bakiye);
+				srand(time(NULL));
+				rastgelesayi=HesapNo();
+				BireyselK[k].HesapNo[1].HesapNo=rastgelesayi;
+				printf("Yeni Hesabinizin Bakiyesini Giriniz:");
+				scanf("%d",&BireyselK[k].HesapNo[1].bakiye);
+				FILE *fp;
+				fp=fopen("Bireysel.txt","w");
+				for(k=0;k<i;i++)
+				{
+					fprintf(fp,"%s %s %d %d ",BireyselK[i].KullaniciAdi,BireyselK[i].SoyAdi,BireyselK[i].HesapNo[0].HesapNo,&BireyselK[i].HesapNo[0].bakiye);
+				}
+				say++;
 			}
-			else if(k>i && say==0)
+			else if(k>i||say==0)
 			{
 				printf("\nAradiginiz kelime ile eslesen hesap bulunamadi.Ana menuye dunuluyor.<<<<");
-				sleep(2);
+				sleep(1);
 				system("CLS");
 			}
 				
 			
 		}
-		printf("\nAradiginiz kelime ile eslesen %d hesap bulundu.",say);
+		
 	}
 	else if(secim==2)
 	{
@@ -186,7 +204,7 @@ void HesapAcma(int secim,int i,int n)
 			
 			if(TicariK[k].HesapNo==sorgu1)//string karþýlaþtýrýcý birbirine eþit(0) ise
 			{
-				printf("\n<<<<<<<<<<<<\nHesap no : %d\n\nKisinin\n------------\n Adi    : %s\n Soyadi : %s\n Bakiye : %d TL\n------------\n\n\n",TicariK[k].HesapNo,TicariK[k].KullaniciAdi,TicariK[k].SoyAdi,TicariK[k].bakiye);
+				printf("\n<<<<<<<<<<<<\nHesap no : %d\n\nKisinin\n------------\n Adi    : %s\n Soyadi : %s\n Bakiye : %d TL\n------------\n\n\n",TicariK[k].HesapNo[0].HesapNo,TicariK[k].KullaniciAdi,TicariK[k].SoyAdi,TicariK[k].HesapNo[0].bakiye);
 				++say;//kaç hesap bu kelimeyi içeriyorsa say 
 				HesapEklenecek=k;
 
