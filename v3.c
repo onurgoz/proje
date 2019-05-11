@@ -54,11 +54,12 @@ int main()
 
 void menu()
 {
+	OkuBireysel();
+	OkuTicari();
 	int n,i;
 	i=Ksayisi.BKullaniciS;
 	n=Ksayisi.TKullaniciS;
-	OkuBireysel();
-	OkuTicari();
+	
 	printf("   Banka otomasyonuna hosgeldiniz.   \n");
 	printf("*************************************\n");
 	
@@ -70,7 +71,7 @@ void menu()
 		printf("Kullanicinizi bireysel acmak icin(1)\nTicari acmak icin(2)\n");
 		scanf("%d",&secim1);
 		YeniMusteriEkleme(secim1,i,n);
-		Guncelle();
+		
 		menu();
 		break;
 		case 2:
@@ -163,7 +164,8 @@ void YeniMusteriEkleme(int secim,int i,int n)
 	printf("\nYeni Kullanici no:%d(Lutfen not ediniz.)\n",BireyselK[i].KullaniciNo);
 	printf("\nLutfen ilk bakiyeyi giriniz : ");
 	scanf("%d",&BireyselK[i].Hesap[0].bakiye);
-	fprintf(fp,"\n%s %s - %s - %d\n1\n%d %d\n",BireyselK[i].KullaniciAdi,BireyselK[i].SoyAdi,BireyselK[i].TC,BireyselK[i].KullaniciNo,BireyselK[i].Hesap[0].HesapNo,BireyselK[i].Hesap[0].bakiye);
+	fprintf(fp,"%s %s - %s - %d\n",BireyselK[i].KullaniciAdi,BireyselK[i].SoyAdi,BireyselK[i].TC,BireyselK[i].KullaniciNo);
+	fprintf(fp,"1\n%d %d",BireyselK[i].Hesap[0].HesapNo,BireyselK[i].Hesap[0].bakiye);
 	fclose(fp);
 	Ksayisi.BKullaniciS++;
 	printf("\n------------\nKayit Basarili!Ana menuye donuluyor.<<<<");
@@ -272,7 +274,9 @@ void Guncelle()
 	{
 		fprintf(fp,"%s %s - %s - %d\n%d\n",BireyselK[k].KullaniciAdi,BireyselK[k].SoyAdi,BireyselK[k].TC,BireyselK[k].KullaniciNo,BireyselK[k].HesapS);
 		for(j=0;j<BireyselK[k].HesapS;j++)
+		{
 		fprintf(fp,"%d %d\n",BireyselK[k].Hesap[j].HesapNo,BireyselK[k].Hesap[j].bakiye);
+		}
 	}
 	fclose(fp);
 	fp1=fopen("Ticari.txt","w");
@@ -451,17 +455,17 @@ void ParaYatirma(int secim,int i,int n)
 }
 void HesabaHavale(int secim,int i,int n)
 {
-int say=0,k,KullaniciSorgu,HesapSorgu,BakiyeS,j;
+int say=0,k,j,KullaniciSorgu,KullaniciSorgu1,HesapSorgu,HesapSorgu1,BakiyeS,l,m;
 	if(secim==1)
 	{
-		printf("Hesap acmak istediginiz kisinin Kullanici Numarasini giriniz :\n");
+		printf("Giris yapmak icin  Kullanici Numarasini giriniz :\n");
 		scanf("%d",&KullaniciSorgu);
 		printf("\nARAMA SONUCU\n------------");
 		for(k=0;k<i+1;k++)
 		{
 			if(BireyselK[k].KullaniciNo==KullaniciSorgu)
 			{
-				printf("\nAradiginiz kelime ile eslesen hesap bulundu.\n");
+				printf("\nAradiginiz numara ile eslesen kullanici bulundu.\n");
 				printf("Islem yapmak istediginiz hesabin numarasini giriniz\n");
 				scanf("%d",&HesapSorgu);
 				for(j=0;j<BireyselK[k].HesapS;j++)
@@ -472,11 +476,41 @@ int say=0,k,KullaniciSorgu,HesapSorgu,BakiyeS,j;
 						{
 						printf("\nAradiginiz kelime ile eslesen hesap bulundu.\n");
 						printf("\n<<<<<<<<<<<<\nHesap no : %d\n\nKisinin\n------------\n Adi    : %s\n Soyadi : %s\n Bakiye : %d TL\n------------\n\n\n",BireyselK[k].Hesap[j].HesapNo,BireyselK[k].KullaniciAdi,BireyselK[k].SoyAdi,BireyselK[k].Hesap[j].bakiye);
-						printf("Cekilecek para miktarini giriniz.\n");
+						printf("Havale yapmak istediginiz para miktarini giriniz.\n");
 						scanf("%d",&BakiyeS);
 						}while (BireyselK[k].Hesap[j].bakiye<BakiyeS||750<BakiyeS);
-						BireyselK[k].Hesap[j].bakiye-=BakiyeS;
-						printf("%d hasabinizdan %d TL cekilmistir",BireyselK[k].Hesap[j].HesapNo,BakiyeS);
+						printf("Gondericeginiz kisinin Kullanici Numarasini giriniz :\n");
+						scanf("%d",&KullaniciSorgu1);
+						printf("\nARAMA SONUCU\n------------");
+						for(l=0;l<i+1;l++)
+						{
+							if(BireyselK[l].KullaniciNo==KullaniciSorgu1)
+							{
+							printf("\nAradiginiz kelime ile eslesen Kullanici bulundu.\n");
+							printf("Islem yapmak istediginiz hesabin numarasini giriniz\n");
+							scanf("%d",&HesapSorgu1);
+							for(m=0;m<BireyselK[l].HesapS;m++)
+							{
+								if(BireyselK[l].Hesap[m].HesapNo==HesapSorgu1)
+								{
+										printf("\nAradiginiz kelime ile eslesen hesap bulundu.\n");
+										printf("\n<<<<<<<<<<<<\nHesap no : %d\n\nKisinin\n------------\n Adi    : %s\n Soyadi : %s\n Bakiye : %d TL\n------------\n\n\n",BireyselK[k].Hesap[j].HesapNo,BireyselK[k].KullaniciAdi,BireyselK[k].SoyAdi,BireyselK[k].Hesap[j].bakiye);
+										BireyselK[l].Hesap[m].bakiye+=BakiyeS;
+										BireyselK[k].Hesap[j].bakiye-=BakiyeS;
+										printf("%d hasabinizdan %d TL cekilmistir",BireyselK[k].Hesap[j].HesapNo,BakiyeS);
+								}
+							}
+						
+						
+						say++;
+						}
+						else if(k>i||say==0)
+						{
+					printf("\nAradiginiz kelime ile eslesen hesap bulunamadi.Ana menuye dunuluyor.<<<<");
+					sleep(1);
+					system("CLS");
+						}
+						}
 					}
 				}
 				
