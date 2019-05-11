@@ -59,6 +59,7 @@ void OkuBireysel()
 	while(!feof(fp))
 	{
 		fscanf(fp, "%s %s - %s - %d",BireyselK[i].KullaniciAdi,BireyselK[i].SoyAdi,BireyselK[i].TC,&BireyselK[i].KullaniciNo);
+		printf("%d",&BireyselK[i].KullaniciNo);
 		fscanf(fp, "%d", &BireyselK[i].HesapS);
 		for (j=0; j<BireyselK[i].HesapS; j++)
 		{
@@ -105,13 +106,13 @@ void menu()
 		printf("Hesabinizi bireysel acmak icin(1)\nticari acmak icin(2)\n");
 		scanf("%d",&secim1);
 		YeniMusteriEkleme(secim1,i,n);
-		menu(i,n);
+		menu();
 		break;
 		case 2:
 		printf("Hesabinizi bireysel acmak icin(1)\nticari acmak icin(2)\n");
 		scanf("%d",&secim1);
 		HesapAcma(secim1,i,n);
-		menu(i,n);
+		menu();
 		break;
 		
 
@@ -142,7 +143,7 @@ void YeniMusteriEkleme(int secim,int i,int n)
 	printf("\nYeni Kullanici no:%d(Lutfen not ediniz.)\n",BireyselK[i].KullaniciNo);
 	printf("\nLutfen ilk bakiyeyi giriniz : ");
 	scanf("%d",&BireyselK[i].Hesap[0].bakiye);
-	fprintf(fp,"%s %s - %s - %d\n1\n%d %d",BireyselK[i].KullaniciAdi,BireyselK[i].SoyAdi,BireyselK[i].TC,BireyselK[i].KullaniciNo,BireyselK[i].Hesap[0].HesapNo,BireyselK[i].Hesap[0].bakiye);
+	fprintf(fp,"\n%s %s - %s - %d\n1\n%d %d\n",BireyselK[i].KullaniciAdi,BireyselK[i].SoyAdi,BireyselK[i].TC,BireyselK[i].KullaniciNo,BireyselK[i].Hesap[0].HesapNo,BireyselK[i].Hesap[0].bakiye);
 	fclose(fp);
 	Ksayisi.BKullaniciS++;
 	printf("\n------------\nKayit Basarili!Ana menuye donuluyor.<<<<");
@@ -163,12 +164,12 @@ void YeniMusteriEkleme(int secim,int i,int n)
 	rastgelesayi=No(secim1);
 	TicariK[n].Hesap[0].HesapNo=rastgelesayi;
 	secim1=2;
-	rastgelesayi=no(secim1);
+	rastgelesayi=No(secim1);
 	TicariK[n].KullaniciNo=rastgelesayi;
 	printf("\nYeni hesap no:%d(Lutfen not ediniz.)\n",TicariK[n].Hesap[0].HesapNo);
 	printf("\nLutfen ilk bakiyeyi giriniz : ");
 	scanf("%d",&TicariK[n].Hesap[0].bakiye);
-	fprintf(fp1,"%s %s - %s - %d\n1\n%d %d",TicariK[n].KullaniciAdi,TicariK[n].SoyAdi,TicariK[n].TC,TicariK[n].KullaniciNo,TicariK[n].Hesap[0].HesapNo,TicariK[n].Hesap[0].bakiye);
+	fprintf(fp1,"\n%s %s - %s - %d\n1\n%d %d\n",TicariK[n].KullaniciAdi,TicariK[n].SoyAdi,TicariK[n].TC,TicariK[n].KullaniciNo,TicariK[n].Hesap[0].HesapNo,TicariK[n].Hesap[0].bakiye);
 	fclose(fp1);
 	Ksayisi.TKullaniciS++;
 	printf("\n------------\nKayit Basarili!Ana menuye donuluyor.<<<<");
@@ -180,19 +181,16 @@ void HesapAcma(int secim,int i,int n)
 	int say=0,k,sorgu1,j;
 		if(secim==1)
 		{
-			
-			FILE *fp;
-			fp=fopen("Bireysel.txt","r");
-
 			printf("Hesap acmak istediginiz kisinin Kullanici Numarasini giriniz :\n");
 			scanf("%d",&sorgu1);
 			printf("\nARAMA SONUCU\n------------");
-			for(k=0;k<i;k++)
+			for(k=0;k<i+1;k++)
 			{
 				if(BireyselK[k].KullaniciNo==sorgu1)//string karþýlaþtýrýcý birbirine eþit(0) ise
 				{
 					printf("\nAradiginiz kelime ile eslesen hesap bulundu.");
-					printf("\n<<<<<<<<<<<<\nHesap no : %d\n\nKisinin\n------------\n Adi    : %s\n Soyadi : %s\n Bakiye : %d TL\n------------\n\n\n",BireyselK[k].Hesap[0].HesapNo,BireyselK[k].KullaniciAdi,BireyselK[k].SoyAdi,BireyselK[k].Hesap[0].bakiye);
+					for(j=0;j<Ksayisi.BKullaniciS;j++)
+					printf("\n<<<<<<<<<<<<\nHesap no : %d\n\nKisinin\n------------\n Adi    : %s\n Soyadi : %s\n Bakiye : %d TL\n------------\n\n\n",BireyselK[k].Hesap[j].HesapNo,BireyselK[k].KullaniciAdi,BireyselK[k].SoyAdi,BireyselK[k].Hesap[j].bakiye);
 					srand(time(NULL));
 					rastgelesayi=No(1);
 					BireyselK[k].Hesap[BireyselK[k].HesapS].HesapNo=rastgelesayi;
@@ -215,9 +213,6 @@ void HesapAcma(int secim,int i,int n)
 		}
 		else if(secim==2)
 		{
-				
-			FILE *fp1;
-			fp1=fopen("Ticari.txt","r");
 			srand(time(NULL));
 			
 			printf("Hesap acmak istediginiz kisinin Kullanici Numarasini giriniz :\n");
@@ -254,14 +249,14 @@ void Guncelle(int i,int n)
 	FILE *fp,*fp1;
 				
 	fp=fopen("Bireysel.txt","w");
-	for(k=0;k<i;k++)
+	for(k=0;k<Ksayisi.BKullaniciS;k++)
 	{
 		fprintf(fp,"%s %s - %s - %d\n%d",BireyselK[k].KullaniciAdi,BireyselK[k].SoyAdi,BireyselK[k].TC,BireyselK[k].KullaniciNo,BireyselK[k].HesapS);
 		for(j=0;j<BireyselK[k].HesapS;j++)
 		fprintf(fp,"%d %d",BireyselK[k].Hesap[j].HesapNo,&BireyselK[k].Hesap[j].bakiye);
 	}
 	fp1=fopen("Ticari.txt","w");
-	for(k=0;k<n;k++)
+	for(k=0;k<Ksayisi.TKullaniciS;k++)
 	{
 		fprintf(fp1,"%s %s - %s - %d\n%d",TicariK[k].KullaniciAdi,TicariK[k].SoyAdi,TicariK[k].TC,TicariK[k].KullaniciNo,TicariK[k].HesapS);
 		for(j=0;j<TicariK[k].HesapS;j++)
