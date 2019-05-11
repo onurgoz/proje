@@ -147,6 +147,7 @@ void YeniMusteriEkleme(int secim,int i,int n)
 	if(secim==1)
 	{
 	FILE *fp;
+	BireyselK[i].HesapS=1;
 	fp=fopen("Bireysel.txt","a");
 	srand(time(NULL));
 	printf("\n\nKAYIT EKRANI\n------------\nKisinin\n------------\nAdi    : ");
@@ -165,7 +166,7 @@ void YeniMusteriEkleme(int secim,int i,int n)
 	printf("\nLutfen ilk bakiyeyi giriniz : ");
 	scanf("%d",&BireyselK[i].Hesap[0].bakiye);
 	fprintf(fp,"%s %s - %s - %d\n",BireyselK[i].KullaniciAdi,BireyselK[i].SoyAdi,BireyselK[i].TC,BireyselK[i].KullaniciNo);
-	fprintf(fp,"1\n%d %d",BireyselK[i].Hesap[0].HesapNo,BireyselK[i].Hesap[0].bakiye);
+	fprintf(fp,"%d\n%d %d",BireyselK[i].HesapS,BireyselK[i].Hesap[0].HesapNo,BireyselK[i].Hesap[0].bakiye);
 	fclose(fp);
 	Ksayisi.BKullaniciS++;
 	printf("\n------------\nKayit Basarili!Ana menuye donuluyor.<<<<");
@@ -502,7 +503,7 @@ int say=0,k,j,KullaniciSorgu,KullaniciSorgu1,HesapSorgu,HesapSorgu1,BakiyeS,l,m;
 							}
 						
 						
-						say++;
+							say++;
 						}
 						else if(k>i||say==0)
 						{
@@ -519,7 +520,7 @@ int say=0,k,j,KullaniciSorgu,KullaniciSorgu1,HesapSorgu,HesapSorgu1,BakiyeS,l,m;
 			}
 			else if(k>i||say==0)
 			{
-				printf("\nAradiginiz kelime ile eslesen hesap bulunamadi.Ana menuye dunuluyor.<<<<");
+				printf("\nAradiginiz kelime ile eslesen kullanici bulunamadi.Ana menuye dunuluyor.<<<<");
 				sleep(1);
 				system("CLS");
 			}
