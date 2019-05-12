@@ -195,26 +195,26 @@ void YeniMusteriEkleme(int secim,int i,int n)
 	else if(secim==2)
 	{
 	FILE *fp1;
-	TicariK[i].HesapS=1;
+	TicariK[n].HesapS=1;
 	fp1=fopen("Ticari.txt","a");
 	srand(time(NULL));
 	printf("\n\nKAYIT EKRANI\n------------\nKisinin\n------------\nAdi    : ");
-	scanf("%s",TicariK[i].KullaniciAdi);
+	scanf("%s",TicariK[n].KullaniciAdi);
 	printf("\nSoyadi : ");
-	scanf("%s",TicariK[i].SoyAdi);
+	scanf("%s",TicariK[n].SoyAdi);
 	printf("TC : ");
-	scanf("%s",TicariK[i].TC);
+	scanf("%s",TicariK[n].TC);
 	secim1=1;
 	rastgelesayi=No(secim1);
-	TicariK[i].Hesap[0].HesapNo=rastgelesayi;
+	TicariK[n].Hesap[0].HesapNo=rastgelesayi;
 	secim1=2;
 	rastgelesayi=No(secim1);
-	TicariK[i].KullaniciNo=rastgelesayi;
+	TicariK[n].KullaniciNo=rastgelesayi;
 	printf("\nYeni Kullanici no:%d(Lutfen not ediniz.)\n",TicariK[i].KullaniciNo);
 	printf("\nLutfen ilk bakiyeyi giriniz : ");
 	scanf("%d",&TicariK[i].Hesap[0].bakiye);
-	fprintf(fp1,"%s %s - %s - %d\n",TicariK[i].KullaniciAdi,TicariK[i].SoyAdi,TicariK[i].TC,TicariK[i].KullaniciNo);
-	fprintf(fp1,"%d\n%d %d",TicariK[i].HesapS,TicariK[i].Hesap[0].HesapNo,TicariK[i].Hesap[0].bakiye);
+	fprintf(fp1,"%s %s - %s - %d\n",TicariK[n].KullaniciAdi,TicariK[n].SoyAdi,TicariK[n].TC,TicariK[n].KullaniciNo);
+	fprintf(fp1,"%d\n%d %d",TicariK[n].HesapS,TicariK[n].Hesap[0].HesapNo,TicariK[n].Hesap[0].bakiye);
 	fclose(fp1);
 	Ksayisi.BKullaniciS++;
 	printf("\n------------\nKayit Basarili!Ana menuye donuluyor.<<<<");
@@ -487,7 +487,8 @@ void ParaYatirma(int secim,int i,int n)
 }
 void HesabaHavale(int secim,int i,int n)
 {
-int say=0,k,j,KullaniciSorgu,KullaniciSorgu1,HesapSorgu,HesapSorgu1,BakiyeS,l,m;
+
+	int say=0,k,j,KullaniciSorgu,KullaniciSorgu1,HesapSorgu,HesapSorgu1,BakiyeS,l,m;
 	if(secim==1)
 	{
 		printf("Giris yapmak icin  Kullanici Numarasini giriniz :\n");
