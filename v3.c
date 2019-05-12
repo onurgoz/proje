@@ -54,9 +54,9 @@ int main()
 
 void menu()
 {
+	int n,i;
 	OkuBireysel();
 	OkuTicari();
-	int n,i;
 	i=Ksayisi.BKullaniciS;
 	n=Ksayisi.TKullaniciS;
 	
@@ -71,7 +71,11 @@ void menu()
 		printf("Kullanicinizi bireysel acmak icin(1)\nTicari acmak icin(2)\n");
 		scanf("%d",&secim1);
 		YeniMusteriEkleme(secim1,i,n);
-		
+		Guncelle();
+		OkuBireysel();
+		OkuTicari();
+		i=Ksayisi.BKullaniciS;
+		n=Ksayisi.TKullaniciS;
 		menu();
 		break;
 		case 2:
@@ -79,6 +83,10 @@ void menu()
 		scanf("%d",&secim1);
 		HesapAcma(secim1,i,n);
 		Guncelle();
+		OkuBireysel();
+		OkuTicari();
+		i=Ksayisi.BKullaniciS;
+		n=Ksayisi.TKullaniciS;
 		menu();
 		break;
 		case 3:
@@ -86,6 +94,10 @@ void menu()
 		scanf("%d",&secim1);
 		ParaCekme(secim1,i,n);
 		Guncelle();
+		OkuBireysel();
+		OkuTicari();
+		i=Ksayisi.BKullaniciS;
+		n=Ksayisi.TKullaniciS;
 		menu();
 		break;
 		case 4:
@@ -93,6 +105,10 @@ void menu()
 		scanf("%d",&secim1);
 		ParaYatirma(secim1,i,n);
 		Guncelle();
+		OkuBireysel();
+		OkuTicari();
+		i=Ksayisi.BKullaniciS;
+		n=Ksayisi.TKullaniciS;
 		menu();
 		break;
 		case 5:
@@ -100,6 +116,10 @@ void menu()
 		scanf("%d",&secim1);
 		HesabaHavale(secim1,i,n);
 		Guncelle();
+		OkuBireysel();
+		OkuTicari();
+		i=Ksayisi.BKullaniciS;
+		n=Ksayisi.TKullaniciS;
 		menu();
 		break;
 	}
@@ -212,18 +232,20 @@ void HesapAcma(int secim,int i,int n)
 				if(BireyselK[k].KullaniciNo==sorgu1)//string karþýlaþtýrýcý birbirine eþit(0) ise
 				{
 					printf("\nAradiginiz kelime ile eslesen hesap bulundu.");
-					for(j=0;j<Ksayisi.BKullaniciS;j++)
+					for(j=0;j<BireyselK[k].HesapS;j++)
+					{
 					printf("\n<<<<<<<<<<<<\nHesap no : %d\n\nKisinin\n------------\n Adi    : %s\n Soyadi : %s\n Bakiye : %d TL\n------------\n\n\n",BireyselK[k].Hesap[j].HesapNo,BireyselK[k].KullaniciAdi,BireyselK[k].SoyAdi,BireyselK[k].Hesap[j].bakiye);
+					}
 					srand(time(NULL));
 					rastgelesayi=No(1);
 					BireyselK[k].Hesap[BireyselK[k].HesapS].HesapNo=rastgelesayi;
 					printf("Yeni Hesabinizin Bakiyesini Giriniz:");
 					scanf("%d",&BireyselK[k].Hesap[BireyselK[k].HesapS].bakiye);
 					BireyselK[k].HesapS++;
-					Guncelle();
+					printf("%d",BireyselK[k].Hesap[BireyselK[k].HesapS].bakiye);
 					say++;
 				}
-				else if(k>i||say==0)
+				else if(k>=i||say==0)
 				{
 					printf("\nAradiginiz kelime ile eslesen hesap bulunamadi.Ana menuye dunuluyor.<<<<");
 					sleep(1);
@@ -253,7 +275,7 @@ void HesapAcma(int secim,int i,int n)
 				printf("Yeni Hesabinizin Bakiyesini Giriniz:");
 				scanf("%d",&TicariK[k].Hesap[TicariK[k].HesapS].bakiye);
 				TicariK[k].HesapS++;
-				Guncelle();
+				
 				say++;
 			}
 			else if(k>i||say==0)
