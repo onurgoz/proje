@@ -36,7 +36,7 @@ void OkuTicari();
 void menu();
 void YeniMusteriEkleme(int secim,int i,int n);
 void HesapAcma(int secim,int i,int n);
-void ParaCekme(int secim,int i,int n);
+void ParaCekme(int secim,int n,int i);
 void ParaYatirma(int secim,int i,int n);
 void HesabaHavale(int secim,int i,int n);
 void BankaGelirGiderRaporu(int i,int n);
@@ -210,13 +210,13 @@ void YeniMusteriEkleme(int secim,int i,int n)
 	secim1=2;
 	rastgelesayi=No(secim1);
 	TicariK[n].KullaniciNo=rastgelesayi;
-	printf("\nYeni Kullanici no:%d(Lutfen not ediniz.)\n",TicariK[i].KullaniciNo);
+	printf("\nYeni Kullanici no:%d(Lutfen not ediniz.)\n",TicariK[n].KullaniciNo);
 	printf("\nLutfen ilk bakiyeyi giriniz : ");
-	scanf("%d",&TicariK[i].Hesap[0].bakiye);
+	scanf("%d",&TicariK[n].Hesap[0].bakiye);
 	fprintf(fp1,"%s %s - %s - %d\n",TicariK[n].KullaniciAdi,TicariK[n].SoyAdi,TicariK[n].TC,TicariK[n].KullaniciNo);
 	fprintf(fp1,"%d\n%d %d",TicariK[n].HesapS,TicariK[n].Hesap[0].HesapNo,TicariK[n].Hesap[0].bakiye);
 	fclose(fp1);
-	Ksayisi.BKullaniciS++;
+	Ksayisi.TKullaniciS++;
 	printf("\n------------\nKayit Basarili!Ana menuye donuluyor.<<<<");
 	system("CLS");
 	}
@@ -311,13 +311,13 @@ void Guncelle()
 	{
 		fprintf(fp1,"%s %s - %s - %d\n%d\n",TicariK[k].KullaniciAdi,TicariK[k].SoyAdi,TicariK[k].TC,TicariK[k].KullaniciNo,TicariK[k].HesapS);
 		for(j=0;j<TicariK[k].HesapS;j++)
-		fprintf(fp1,"%d %d\n",TicariK[k].Hesap[j].HesapNo,&TicariK[k].Hesap[j].bakiye);
+		fprintf(fp1,"%d %d\n",TicariK[k].Hesap[j].HesapNo,TicariK[k].Hesap[j].bakiye);
 	}
 	fclose(fp1);
 }
-void ParaCekme(int secim,int i,int n)
+void ParaCekme(int secim,int n,int i)
 {
-	int say=0,k,KullaniciSorgu,HesapSorgu,BakiyeS,j;
+	int say=0,k,KullaniciSorgu=0,HesapSorgu=0,BakiyeS=0,j;
 	if(secim==1)
 	{
 		printf("Hesap acmak istediginiz kisinin Kullanici Numarasini giriniz :\n");
@@ -363,7 +363,7 @@ void ParaCekme(int secim,int i,int n)
 		printf("Hesap acmak istediginiz kisinin Kullanici Numarasini giriniz :\n");
 		scanf("%d",&KullaniciSorgu);
 		printf("\nARAMA SONUCU\n------------");
-		for(k=0;k<i+1;k++)
+		for(k=0;k<n+1;k++)
 		{
 			if(TicariK[k].KullaniciNo==KullaniciSorgu)
 			{
@@ -377,10 +377,10 @@ void ParaCekme(int secim,int i,int n)
 						do
 						{
 						printf("\nAradiginiz kelime ile eslesen hesap bulundu.\n");
-						printf("\n<<<<<<<<<<<<\nHesap no : %d\n\nKisinin\n------------\n Adi    : %s\n Soyadi : %s\n Bakiye : %d TL\n------------\n\n\n",BireyselK[k].Hesap[j].HesapNo,BireyselK[k].KullaniciAdi,BireyselK[k].SoyAdi,BireyselK[k].Hesap[j].bakiye);
+						printf("\n<<<<<<<<<<<<\nHesap no : %d\n\nKisinin\n------------\n Adi    : %s\n Soyadi : %s\n Bakiye : %d TL\n------------\n\n\n",TicariK[k].Hesap[j].HesapNo,TicariK[k].KullaniciAdi,TicariK[k].SoyAdi,TicariK[k].Hesap[j].bakiye);
 						printf("Cekilecek para miktarini giriniz.\n");
 						scanf("%d",&BakiyeS);
-						}while (TicariK[k].Hesap[j].bakiye<BakiyeS||750<BakiyeS);
+						}while (TicariK[k].Hesap[j].bakiye<BakiyeS||1500>=BakiyeS);
 						TicariK[k].Hesap[j].bakiye-=BakiyeS;
 						printf("%d hasabinizdan %d TL cekilmistir",TicariK[k].Hesap[j].HesapNo,BakiyeS);
 					}
