@@ -247,7 +247,7 @@ void HesapAcma(int secim,int i,int n)
 					printf("%d",BireyselK[k].Hesap[BireyselK[k].HesapS].bakiye);
 					say++;
 				}
-				else if(k>=i||say==0)
+				else if(k>=i&&say==0)
 				{
 					printf("\nAradiginiz kelime ile eslesen hesap bulunamadi.Ana menuye dunuluyor.<<<<");
 					sleep(1);
@@ -270,7 +270,7 @@ void HesapAcma(int secim,int i,int n)
 					printf("\nAradiginiz kelime ile eslesen hesap bulundu.");
 					for(j=0;j<TicariK[k].HesapS;j++)
 					{
-					printf("\n<<<<<<<<<<<<\nHesap no : %d\n\nKisinin\n------------\n Adi    : %s\n Soyadi : %s\n Bakiye : %d TL\n------------\n\n\n",BireyselK[k].Hesap[j].HesapNo,BireyselK[k].KullaniciAdi,BireyselK[k].SoyAdi,BireyselK[k].Hesap[j].bakiye);
+					printf("\n<<<<<<<<<<<<\nHesap no : %d\n\nKisinin\n------------\n Adi    : %s\n Soyadi : %s\n Bakiye : %d TL\n------------\n\n\n",TicariK[k].Hesap[j].HesapNo,TicariK[k].KullaniciAdi,TicariK[k].SoyAdi,TicariK[k].Hesap[j].bakiye);
 					}
 					srand(time(NULL));
 					rastgelesayi=No(1);
@@ -281,7 +281,7 @@ void HesapAcma(int secim,int i,int n)
 					printf("%d",TicariK[k].Hesap[TicariK[k].HesapS].bakiye);
 					say++;
 				}
-				else if(k>=i||say==0)
+				else if(k>=i&&say==0)
 				{
 					printf("\nAradiginiz kelime ile eslesen hesap bulunamadi.Ana menuye dunuluyor.<<<<");
 					sleep(1);
@@ -462,7 +462,7 @@ void ParaYatirma(int secim,int i,int n)
 						
 						
 						printf("\nAradiginiz kelime ile eslesen hesap bulundu.\n");
-						printf("\n<<<<<<<<<<<<\nHesap no : %d\n\nKisinin\n------------\n Adi    : %s\n Soyadi : %s\n Bakiye : %d TL\n------------\n\n\n",BireyselK[k].Hesap[j].HesapNo,BireyselK[k].KullaniciAdi,BireyselK[k].SoyAdi,BireyselK[k].Hesap[j].bakiye);
+						printf("\n<<<<<<<<<<<<\nHesap no : %d\n\nKisinin\n------------\n Adi    : %s\n Soyadi : %s\n Bakiye : %d TL\n------------\n\n\n",TicariK[k].Hesap[j].HesapNo,TicariK[k].KullaniciAdi,TicariK[k].SoyAdi,TicariK[k].Hesap[j].bakiye);
 						printf("Yatirilacak para miktarini giriniz.\n");
 						scanf("%d",&Bakiye);
 						
@@ -578,7 +578,7 @@ void HesabaHavale(int secim,int i,int n)
 						do
 						{
 						printf("\nAradiginiz kelime ile eslesen hesap bulundu.\n");
-						printf("\n<<<<<<<<<<<<\nHesap no : %d\n\nKisinin\n------------\n Adi    : %s\n Soyadi : %s\n Bakiye : %d TL\n------------\n\n\n",BireyselK[k].Hesap[j].HesapNo,BireyselK[k].KullaniciAdi,BireyselK[k].SoyAdi,BireyselK[k].Hesap[j].bakiye);
+						printf("\n<<<<<<<<<<<<\nHesap no : %d\n\nKisinin\n------------\n Adi    : %s\n Soyadi : %s\n Bakiye : %d TL\n------------\n\n\n",TicariK[k].Hesap[j].HesapNo,TicariK[k].KullaniciAdi,TicariK[k].SoyAdi,TicariK[k].Hesap[j].bakiye);
 						printf("Havale yapmak istediginiz para miktarini giriniz.\n");
 						scanf("%d",&BakiyeS);
 						}while (TicariK[k].Hesap[j].bakiye<BakiyeS||750<BakiyeS);
