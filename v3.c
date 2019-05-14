@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include<time.h>//srand
 #include<string.h>
+#include<windows.h>
 typedef struct
 {
 	int HesapNo;
@@ -523,7 +524,7 @@ void HesabaHavale(int secim,int i,int n)
 						printf("\n<<<<<<<<<<<<\nHesap no : %d\n\nKisinin\n------------\n Adi    : %s\n Soyadi : %s\n Bakiye : %d TL\n------------\n\n\n",BireyselK[k].Hesap[j].HesapNo,BireyselK[k].KullaniciAdi,BireyselK[k].SoyAdi,BireyselK[k].Hesap[j].bakiye);
 						printf("Havale yapmak istediginiz para miktarini giriniz.\n");
 						scanf("%d",&BakiyeS);
-						}while (BireyselK[k].Hesap[j].bakiye<BakiyeS||750<BakiyeS);
+						}while (BireyselK[k].Hesap[j].bakiye<BakiyeS);
 						printf("Gondericeginiz kisinin Kullanici Numarasini giriniz :\n");
 						scanf("%d",&KullaniciSorgu1);
 						printf("\nARAMA SONUCU\n------------");
@@ -593,7 +594,7 @@ void HesabaHavale(int secim,int i,int n)
 						printf("\n<<<<<<<<<<<<\nHesap no : %d\n\nKisinin\n------------\n Adi    : %s\n Soyadi : %s\n Bakiye : %d TL\n------------\n\n\n",TicariK[k].Hesap[j].HesapNo,TicariK[k].KullaniciAdi,TicariK[k].SoyAdi,TicariK[k].Hesap[j].bakiye);
 						printf("Havale yapmak istediginiz para miktarini giriniz.\n");
 						scanf("%d",&BakiyeS);
-						}while (TicariK[k].Hesap[j].bakiye<BakiyeS||750<BakiyeS);
+						}while (TicariK[k].Hesap[j].bakiye<BakiyeS);
 						printf("Gondericeginiz kisinin Kullanici Numarasini giriniz :\n");
 						scanf("%d",&KullaniciSorgu1);
 						printf("\nARAMA SONUCU\n------------");
@@ -738,28 +739,35 @@ void HesapKapatma(int secim,int i,int n)
 					{
 						printf("\nAradiginiz kelime ile eslesen hesap bulundu.\n");
 						printf("\n<<<<<<<<<<<<\nHesap no : %d\n\nKisinin\n------------\n Adi    : %s\n Soyadi : %s\n Bakiye : %d TL\n------------\n\n\n",TicariK[k].Hesap[j].HesapNo,TicariK[k].KullaniciAdi,TicariK[k].SoyAdi,TicariK[k].Hesap[j].bakiye);
-						do
+						if(TicariK[k].Hesap[j].bakiye==0)
 						{
-							printf("%d Nolu Hesabi silmek istediginize emin misiniz (1/2)");
-							scanf("%d",&sorgula);
-							
-							
-						}while(!(sorgula==1||sorgula==2));
-						printf("TEST\n");
-						if(sorgula==1)
-						{
-							for(l=j;l<TicariK[k].HesapS;l++)
+							do
 							{
-								TicariK[k].Hesap[l]=TicariK[k].Hesap[l+1];
+								printf("%d Nolu Hesabi silmek istediginize emin misiniz (1/2)");
+								scanf("%d",&sorgula);
+							}while(!(sorgula==1||sorgula==2));
+							if(sorgula==1)
+							{
+								for(l=j;l<TicariK[k].HesapS;l++)
+								{
+									TicariK[k].Hesap[l]=TicariK[k].Hesap[l+1];
+								}
+									TicariK[k].HesapS--;
 							}
-							
-							TicariK[k].HesapS--;
 						}
-						else if(sorgula==2)
+								else if(sorgula==2)
+								{
+									printf("Islem iptal edildi.\n");
+									system("CLS");
+								}
+						else
 						{
-							printf("Islem iptal edildi.\n");
+							printf("Bakiyenizde para bulunmakta islem iptal ediliyor.\n");
+							wait(1);
 							system("CLS");
+							break;
 						}
+					
 					}
 					else if(k>i&&say==0)
 					{
