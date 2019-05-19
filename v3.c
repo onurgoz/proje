@@ -865,77 +865,73 @@ void BankaGelirGider()
 }
 void HesapOzeti(int secim)
 {
-int say=0,i,KullaniciSorgu,HesapSorgu,j,l,n;
+	int say=0,i,KullaniciSorgu,HesapSorgu,j,l,n;
 	if(secim==1)
 	{
-		printf("Hesap ozetini gormek istediginiz kisinin Kullanici Numarasini giriniz :\n");
-		scanf("%d",&KullaniciSorgu);
-		printf("\nARAMA SONUCU\n------------");
-		for(i=0;i<bank.Ksayisi.BKullaniciS;i++)
+	printf("Hesap ozetini gormek istediginiz kisinin Kullanici Numarasini giriniz :\n");
+	scanf("%d",&KullaniciSorgu);
+	printf("\nARAMA SONUCU\n------------");
+	for(i=0;i<bank.Ksayisi.BKullaniciS;i++)
+	{
+		if(bank.BireyselK[i].KullaniciNo==KullaniciSorgu)
 		{
-			if(bank.BireyselK[i].KullaniciNo==KullaniciSorgu)
+			printf("\nAradiginiz kelime ile eslesen kullanici bulundu.\n");
+			printf("Islem yapmak istediginiz hesabin numarasini giriniz\n");
+			scanf("%d",&HesapSorgu);
+			for(j=0;j<bank.BireyselK[i].HesapS;j++)
 			{
-				printf("\nAradiginiz kelime ile eslesen kullanici bulundu.\n");
-				printf("Islem yapmak istediginiz hesabin numarasini giriniz\n");
-				scanf("%d",&HesapSorgu);
-				for(j=0;j<bank.BireyselK[i].HesapS;j++)
+				if(bank.BireyselK[i].Hesap[j].HesapNo==HesapSorgu)
 				{
-					if(bank.BireyselK[i].Hesap[j].HesapNo==HesapSorgu)
+					printf("\nAradiginiz kelime ile eslesen hesap bulundu.\n");
+					for(l=0;l<bank.BireyselK[i].Hesap[j].islemsayisi;l++)
 					{
-						printf("\nAradiginiz kelime ile eslesen hesap bulundu.\n");
-						for(l=0;l<bank.BireyselK[i].Hesap[j].islemsayisi;l++)
-						{
-							printf("%d. Islem %d:%d:%d - %d.%d.%d : %d %d %s\n",l+1,bank.BireyselK[i].Hesap[j].islem[l].zaman.tm_hour,bank.BireyselK[i].Hesap[j].islem[l].zaman.tm_min,bank.BireyselK[i].Hesap[j].islem[l].zaman.tm_sec,bank.BireyselK[i].Hesap[j].islem[l].zaman.tm_day,bank.BireyselK[i].Hesap[j].islem[l].zaman.tm_mon,bank.BireyselK[i].Hesap[j].islem[l].zaman.tm_year,bank.BireyselK[i].Hesap[j].islem[l].islemHesabi,bank.BireyselK[i].Hesap[j].islem[l].islemmik,bank.BireyselK[i].Hesap[j].islem[l].islemturu);
-						}
+						printf("%d. Islem %d:%d:%d - %d.%d.%d : %d %d %s\n",l+1,bank.BireyselK[i].Hesap[j].islem[l].zaman.tm_hour,bank.BireyselK[i].Hesap[j].islem[l].zaman.tm_min,bank.BireyselK[i].Hesap[j].islem[l].zaman.tm_sec,bank.BireyselK[i].Hesap[j].islem[l].zaman.tm_day,bank.BireyselK[i].Hesap[j].islem[l].zaman.tm_mon,bank.BireyselK[i].Hesap[j].islem[l].zaman.tm_year,bank.BireyselK[i].Hesap[j].islem[l].islemHesabi,bank.BireyselK[i].Hesap[j].islem[l].islemmik,bank.BireyselK[i].Hesap[j].islem[l].islemturu);
 					}
 				}
-				
-				
+			}
 				say++;
-			}
-			else if(i>bank.Ksayisi.BKullaniciS&&say==0)
-			{
-				printf("\nAradiginiz kelime ile eslesen hesap bulunamadi.Ana menuye dunuluyor.<<<<");
-				wait(1);
-				system("CLS");
-			}
 		}
+		else if(i>bank.Ksayisi.BKullaniciS&&say==0)
+		{
+			printf("\nAradiginiz kelime ile eslesen hesap bulunamadi.Ana menuye dunuluyor.<<<<");
+			wait(1);
+			system("CLS");
+		}
+	}
 		
 	}
 	else if(secim==2)
 	{
-			printf("Hesap acmak istediginiz kisinin Kullanici Numarasini giriniz :\n");
-		scanf("%d",&KullaniciSorgu);
-		printf("\nARAMA SONUCU\n------------");
-		for(n=0;n<bank.Ksayisi.TKullaniciS;n++)
+	printf("Hesap acmak istediginiz kisinin Kullanici Numarasini giriniz :\n");
+	scanf("%d",&KullaniciSorgu);
+	printf("\nARAMA SONUCU\n------------");
+	for(n=0;n<bank.Ksayisi.TKullaniciS;n++)
+	{
+		if(bank.TicariK[n].KullaniciNo==KullaniciSorgu)
 		{
-			if(bank.TicariK[n].KullaniciNo==KullaniciSorgu)
+			printf("\nAradiginiz kelime ile eslesen hesap bulundu.\n");
+			printf("Islem yapmak istediginiz hesabin numarasini giriniz\n");
+			scanf("%d",&HesapSorgu);
+			for(j=0;j<bank.TicariK[n].HesapS;j++)
 			{
-				printf("\nAradiginiz kelime ile eslesen hesap bulundu.\n");
-				printf("Islem yapmak istediginiz hesabin numarasini giriniz\n");
-				scanf("%d",&HesapSorgu);
-				for(j=0;j<bank.TicariK[n].HesapS;j++)
+				if(bank.TicariK[n].Hesap[j].HesapNo==HesapSorgu)
 				{
-					if(bank.TicariK[n].Hesap[j].HesapNo==HesapSorgu)
+					printf("Aradiginiz kelime ile eslesen hesap bulundu.\n");
+					for(l=0;l<bank.TicariK[n].Hesap[j].islemsayisi;l++)
 					{
-						printf("Aradiginiz kelime ile eslesen hesap bulundu.\n");
-						for(l=0;l<bank.TicariK[n].Hesap[j].islemsayisi;l++)
-						{
-						printf("%d. Islem %d:%d:%d - %d.%d.%d : %d %d %s\n",l+1,bank.TicariK[n].Hesap[j].islem[l].zaman.tm_hour,bank.TicariK[n].Hesap[j].islem[l].zaman.tm_min,bank.TicariK[n].Hesap[j].islem[l].zaman.tm_sec,bank.TicariK[n].Hesap[j].islem[l].zaman.tm_day,bank.TicariK[n].Hesap[j].islem[l].zaman.tm_mon,bank.TicariK[n].Hesap[j].islem[l].zaman.tm_year,bank.TicariK[n].Hesap[j].islem[l].islemHesabi,bank.TicariK[n].Hesap[j].islem[l].islemmik,bank.TicariK[n].Hesap[j].islem[l].islemturu);
-						}
+					printf("%d. Islem %d:%d:%d - %d.%d.%d : %d %d %s\n",l+1,bank.TicariK[n].Hesap[j].islem[l].zaman.tm_hour,bank.TicariK[n].Hesap[j].islem[l].zaman.tm_min,bank.TicariK[n].Hesap[j].islem[l].zaman.tm_sec,bank.TicariK[n].Hesap[j].islem[l].zaman.tm_day,bank.TicariK[n].Hesap[j].islem[l].zaman.tm_mon,bank.TicariK[n].Hesap[j].islem[l].zaman.tm_year,bank.TicariK[n].Hesap[j].islem[l].islemHesabi,bank.TicariK[n].Hesap[j].islem[l].islemmik,bank.TicariK[n].Hesap[j].islem[l].islemturu);
 					}
 				}
-				
-				
-				say++;
 			}
-			else if(n>bank.Ksayisi.TKullaniciS&&say==0)
-			{
-				printf("\nAradiginiz kelime ile eslesen hesap bulunamadi.Ana menuye dunuluyor.<<<<");
-				wait(1);
-				system("CLS");
-			}
+			say++;
 		}
+		else if(n>bank.Ksayisi.TKullaniciS&&say==0)
+		{
+			printf("\nAradiginiz kelime ile eslesen hesap bulunamadi.Ana menuye dunuluyor.<<<<");
+			wait(1);
+			system("CLS");
+		}
+	}
 		
 	}
 }
