@@ -521,8 +521,6 @@ void ParaCekme(int secim)
 						printf("\nAradiginiz kelime ile eslesen hesap bulunamadi.Ana menuye dunuluyor.<<<<");
 						wait(1);
 						system("cls");
-						printf("cscs");
-						
 					}
 				}
 				
