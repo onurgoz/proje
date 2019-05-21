@@ -768,9 +768,9 @@ void HesabaHavale(int secim)
 										printf("%d hasabinizdan %d TL cekilmistir\n",bank.BireyselK[k].Hesap[j].HesapNo,BakiyeS+BakiyeS/50);
 										bank.BireyselK[k].Hesap[j].islem[bank.BireyselK[k].Hesap[j].islemsayisi].islemHesabi=bank.BireyselK[l].Hesap[m].HesapNo;
 										bank.BireyselK[l].Hesap[m].islem[bank.BireyselK[l].Hesap[m].islemsayisi].islemHesabi=bank.BireyselK[k].Hesap[j].HesapNo;
-										bank.BireyselK[k].Hesap[j].islem[bank.BireyselK[k].Hesap[j].islemsayisi].islemmik=BakiyeS;
+										bank.BireyselK[k].Hesap[j].islem[bank.BireyselK[k].Hesap[j].islemsayisi].islemmik=BakiyeS+BakiyeS/50;
 										bank.BireyselK[l].Hesap[m].islem[bank.BireyselK[l].Hesap[m].islemsayisi].islemmik=BakiyeS;
-										strcpy(bank.BireyselK[k].Hesap[j].islem[bank.BireyselK[k].Hesap[j].islemsayisi].islemturu,"Para kesilmistir.");
+										strcpy(bank.BireyselK[k].Hesap[j].islem[bank.BireyselK[k].Hesap[j].islemsayisi].islemturu,"Havale+kesilen_para.");
 										strcpy(bank.BireyselK[l].Hesap[m].islem[bank.BireyselK[l].Hesap[m].islemsayisi].islemturu,"Havale_Gelmistir.");
 										bank.BireyselK[k].Hesap[j].islemsayisi++;
 										bank.BireyselK[l].Hesap[m].islemsayisi++;
