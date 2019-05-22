@@ -923,6 +923,7 @@ void HesapOzeti(int secim)
 					for(l=0;l<bank.BireyselK[i].Hesap[j].islemsayisi;l++)
 					{
 						printf("%d. Islem %d:%d:%d - %d.%d.%d : %d %d %s\n",l+1,bank.BireyselK[i].Hesap[j].islem[l].zaman.tm_hour,bank.BireyselK[i].Hesap[j].islem[l].zaman.tm_min,bank.BireyselK[i].Hesap[j].islem[l].zaman.tm_sec,bank.BireyselK[i].Hesap[j].islem[l].zaman.tm_day,bank.BireyselK[i].Hesap[j].islem[l].zaman.tm_mon,bank.BireyselK[i].Hesap[j].islem[l].zaman.tm_year,bank.BireyselK[i].Hesap[j].islem[l].islemHesabi,bank.BireyselK[i].Hesap[j].islem[l].islemmik,bank.BireyselK[i].Hesap[j].islem[l].islemturu);
+						printf("\nAna menuye dunuluyor.<<<<");
 						wait(1);
 						system("CLS");
 					}
@@ -959,6 +960,7 @@ void HesapOzeti(int secim)
 					for(l=0;l<bank.TicariK[n].Hesap[j].islemsayisi;l++)
 					{
 					printf("%d. Islem %d:%d:%d - %d.%d.%d : %d %d %s\n",l+1,bank.TicariK[n].Hesap[j].islem[l].zaman.tm_hour,bank.TicariK[n].Hesap[j].islem[l].zaman.tm_min,bank.TicariK[n].Hesap[j].islem[l].zaman.tm_sec,bank.TicariK[n].Hesap[j].islem[l].zaman.tm_day,bank.TicariK[n].Hesap[j].islem[l].zaman.tm_mon,bank.TicariK[n].Hesap[j].islem[l].zaman.tm_year,bank.TicariK[n].Hesap[j].islem[l].islemHesabi,bank.TicariK[n].Hesap[j].islem[l].islemmik,bank.TicariK[n].Hesap[j].islem[l].islemturu);
+					printf("\nAna menuye dunuluyor.<<<<");
 					wait(1);
 					system("CLS");
 					}
