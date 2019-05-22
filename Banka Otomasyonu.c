@@ -95,6 +95,9 @@ void menu()
 	OkuTicari();
 	i=bank.Ksayisi.BKullaniciS;
 	n=bank.Ksayisi.TKullaniciS;
+	printf("***************Kinqwan***************");
+	wait(1);
+	system("cls");
 	printf("Manisa Celal Bayar Universitesi / Yazilim Muhendisligi\nYZM-1106 Algoritma ve Programlama II Dersi (2018-2019)\nDonem Projesi / Banka Yazilim Otomasyonu\n");
 	printf("*******************************************************\n");
 	okurapor();
