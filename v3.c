@@ -205,7 +205,7 @@ void OkuBireysel()
 
 	}
 	
-}
+} 
 void OkuTicari(){
 	int n=0,j;
 	FILE *fp1;
@@ -287,7 +287,7 @@ void okurapor()
 {
 	FILE *fp;
 	fp=fopen("rapor.txt","r");
-	fprintf(fp," Bankadan Giden : %d\n Bankaya Gelen : %d\n Bankadaki Toplam Para : %d",&bank.Bgiden,&bank.Bgelen,&bank.Btop);
+	fscanf(fp," Bankadan Giden : %d\n Bankaya Gelen : %d\n Bankadaki Toplam Para : %d",&bank.Bgiden,&bank.Bgelen,&bank.Btop);
 	fclose(fp);
 }
 void YeniMusteriEkleme(int secim,int i,int n)
@@ -897,6 +897,8 @@ void BankaGelirGider()
 {
 	printf("---------Banka Gelir Gider Raporu-----------");
 	printf(" Bankadan Giden : %d\n Bankaya Gelen : %d\n Bankadaki Toplam Para : %d",bank.Bgiden,bank.Bgelen,bank.Btop);
+	wait(1);
+	system("cls");
 }
 void HesapOzeti(int secim)
 {
@@ -921,6 +923,8 @@ void HesapOzeti(int secim)
 					for(l=0;l<bank.BireyselK[i].Hesap[j].islemsayisi;l++)
 					{
 						printf("%d. Islem %d:%d:%d - %d.%d.%d : %d %d %s\n",l+1,bank.BireyselK[i].Hesap[j].islem[l].zaman.tm_hour,bank.BireyselK[i].Hesap[j].islem[l].zaman.tm_min,bank.BireyselK[i].Hesap[j].islem[l].zaman.tm_sec,bank.BireyselK[i].Hesap[j].islem[l].zaman.tm_day,bank.BireyselK[i].Hesap[j].islem[l].zaman.tm_mon,bank.BireyselK[i].Hesap[j].islem[l].zaman.tm_year,bank.BireyselK[i].Hesap[j].islem[l].islemHesabi,bank.BireyselK[i].Hesap[j].islem[l].islemmik,bank.BireyselK[i].Hesap[j].islem[l].islemturu);
+						wait(1);
+						system("CLS");
 					}
 				}
 			}
@@ -955,6 +959,8 @@ void HesapOzeti(int secim)
 					for(l=0;l<bank.TicariK[n].Hesap[j].islemsayisi;l++)
 					{
 					printf("%d. Islem %d:%d:%d - %d.%d.%d : %d %d %s\n",l+1,bank.TicariK[n].Hesap[j].islem[l].zaman.tm_hour,bank.TicariK[n].Hesap[j].islem[l].zaman.tm_min,bank.TicariK[n].Hesap[j].islem[l].zaman.tm_sec,bank.TicariK[n].Hesap[j].islem[l].zaman.tm_day,bank.TicariK[n].Hesap[j].islem[l].zaman.tm_mon,bank.TicariK[n].Hesap[j].islem[l].zaman.tm_year,bank.TicariK[n].Hesap[j].islem[l].islemHesabi,bank.TicariK[n].Hesap[j].islem[l].islemmik,bank.TicariK[n].Hesap[j].islem[l].islemturu);
+					wait(1);
+					system("CLS");
 					}
 				}
 			}
